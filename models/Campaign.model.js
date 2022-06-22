@@ -10,7 +10,7 @@ const campaignSchema = new Schema(
     description: String,
     image: String,
     place: String,
-    case: [{
+    fundsFor: [{
       type: String,
     }],
     totalAmount: Number,
