@@ -7,6 +7,8 @@ const campaignSchema = new Schema(
       type: String,
       unique: true,
     },
+    description: String,
+    image: String,
     place: String,
     case: [{
       type: String,
