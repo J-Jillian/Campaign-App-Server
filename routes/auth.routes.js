@@ -1,5 +1,5 @@
 const bcryptjs = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+let { expressjwt: jwt } = require("express-jwt")
 const { isAuthenticated } = require('../middlewares/jwt.middleware')
 
 const User = require('../models/User.model')
@@ -33,6 +33,8 @@ router.post('/signup', async (req, res, next) => {
     const { username, password } = req.body
   
     const user = await User.findOne({ username })
+
+    console.log(user)
   
     if (user === null) {
       res.status(404).json({ message: 'Username not found', status: 'KO' })
