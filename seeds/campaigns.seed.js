@@ -1,3 +1,8 @@
+const mongoose = require("mongoose");
+
+const CampaignModel = require("../models/Campaign.model");
+
+
 const campaigns = [
     { CampaignName:"Education is not a luxury of peacetime",
       description: "In 2021, We continued to provide vital services responding to the most pressing needs, supporting children out of school and bringing them back to the educational path, distributing food to the most vulnerable people, and supporting healthcare services in communities and camps.",
@@ -18,9 +23,7 @@ const campaigns = [
 ]
 
 
-const mongoose = require("mongoose");
 
-const Campaign = require("../models/Campaign.model");
 
 const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost/fundraising-server";
 
@@ -28,7 +31,7 @@ mongoose
   .connect(MONGO_URI)
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
-    return Campaign.insertMany(campaigns);
+    return CampaignModel.insertMany(campaigns);
   })
   .catch((err) => {
     console.error("Error connecting to mongo: ", err);
