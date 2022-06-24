@@ -10,16 +10,14 @@ const campaignSchema = new Schema(
     description: String,
     image: String,
     place: String,
+
     fundsFor: [{
       type: String,
     }],
     totalAmount: Number,
     creator: [{type: Schema.Types.ObjectId, ref: 'User'}],
     
-    donations:[{ 
-      Amount: Number,
-      Author: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    }]   
+    donations: [{type: Schema.Types.ObjectId, ref: 'User'}], 
 },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

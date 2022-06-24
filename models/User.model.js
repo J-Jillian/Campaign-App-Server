@@ -6,19 +6,11 @@ const userSchema = new Schema(
     username: String,
     password: String,
   
-    campaignDonated: [{
-      Campaign: [{type: Schema.Types.ObjectId, ref: 'Campaign'}],
-      type: String,
-    }],
-    createdCampaign: [{
-      type: String,
-      unique: true,
-      total : Number,
-    }],
-    FavCampaigns: [{ 
-      Campaign: [{type: Schema.Types.ObjectId, ref: 'Campaign'}],
-      type: String,
-    }],
+    campaignDonated:[{type: Schema.Types.ObjectId, ref: 'Campaign'}],
+   
+    createdCampaign: [{type: Schema.Types.ObjectId, ref: 'Campaign'}],
+    
+    FavCampaigns:[{type: Schema.Types.ObjectId, ref: 'Campaign'}], 
  },
     // this second object adds extra properties: `createdAt` and `updatedAt`
    {
