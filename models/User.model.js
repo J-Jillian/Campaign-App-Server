@@ -7,9 +7,11 @@ const userSchema = new Schema({
     unique: true,
   },
   passwordHash: String,
-  donatedCampaign:[],
-  createdCampaign:[],
-  favoritesCampaign: [],
+  campaignDonated:[{type: Schema.Types.ObjectId, ref: 'Campaign'}],
+
+  createdCampaign: [{type: Schema.Types.ObjectId, ref: 'Campaign'}],
+
+  FavCampaigns:[{type: Schema.Types.ObjectId, ref: 'Campaign'}],
 },
 {
 
