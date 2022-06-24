@@ -7,11 +7,12 @@ const userSchema = new Schema({
     unique: true,
   },
   passwordHash: String,
+  donatedCampaign:[],
+  createdCampaign:[],
+  favoritesCampaign: [],
 },
 {
-donatedCampaign:[],
-createdCampaign:[],
-favoritesCampaign: [],
+
   // this second object adds extra properties: `createdAt` and `updatedAt`
   timestamps: true,
 }

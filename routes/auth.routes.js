@@ -8,14 +8,14 @@ const router = require('express').Router()
 router.post('/signup', async (req, res, next) => {
     const { username, password } = req.body
   
-    const newUser = { username, password }
+    const newUser = { username }
     
   
-    const randomSalt = bcryptjs.genSaltSync(10)
+    const randomSalt = await bcryptjs.genSalt(10)
   
-    const passwordHash = bcryptjs.hashSync(password, randomSalt)
-  
-    newUser.password = passwordHash
+    const passwordHash = await bcryptjs.hash(password, randomSalt)
+
+    newUser.passwordHash = passwordHash
     try {
       await User.create(newUser)
       res.status(201).json({ message: 'New user created', status: 'OK' })
