@@ -1,5 +1,5 @@
 const bcryptjs = require('bcryptjs')
-let { expressjwt: jwt } = require("express-jwt")
+const jwt = require('jsonwebtoken')
 const { isAuthenticated } = require('../middlewares/jwt.middleware')
 
 const User = require('../models/User.model')
@@ -31,10 +31,10 @@ router.post('/signup', async (req, res, next) => {
 
   router.post('/login', async (req, res, next) => {
     const { username, password } = req.body
-  
+    console.log("Post logs");
     const user = await User.findOne({ username })
 
-    console.log(user)
+   
   
     if (user === null) {
       res.status(404).json({ message: 'Username not found', status: 'KO' })
@@ -47,6 +47,7 @@ router.post('/signup', async (req, res, next) => {
           algorithm: 'HS256',
           expiresIn: '6h',
         })
+        console.log(token)
         res.json({ token })
       } else {
         res.status(403).json({ message: 'Wrong password', status: 'KO' })
