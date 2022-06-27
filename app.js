@@ -23,7 +23,7 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const campaignRoutes = require("./routes/campaign.routes");
-app.use("/campaign", campaignRoutes);
+app.use("/api/campaign", campaignRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
