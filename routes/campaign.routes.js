@@ -1,6 +1,6 @@
 const Campaign = require('../models/Campaign.model')
 const router = require('express').Router()
-
+const {isAuthenticated} = require ('../middlewares/jwt.middleware')
 //Get all Campaigns
 router.get('/', async (req, res, next) => {
     const campaigns = await Campaign.find()
@@ -17,19 +17,22 @@ router.get('/:campaignId', async(req, res, next)=>{
 
 //Create a campaign
 
-router.post ('/create', async (req, res, next)=> {
+router.post ('/create', isAuthenticated, async (req, res, next)=> {
 const {CampaignName, place, description, foundsFor} = req.body
+const creator = req.payload.id
   try {
     const campaign = await Campaign.create({
-        CampaignName : CampaignName.trim(),
-        place : place.trim(),
-        description: description,
+        CampaignName,
+        place, 
+        description,
         // image: image,
-        foundsFor : foundsFor,
+        foundsFor,
+        creator
  })
-    
+ res.json(campaign);
+    console.log(campaign, "campaña creada en el back") 
   } catch (error) {
-    
+    console.log("camapaña no creada en el back", error) 
   }  
 })
 

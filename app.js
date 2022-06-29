@@ -23,7 +23,10 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const campaignRoutes = require("./routes/campaign.routes");
-app.use("/api/campaign", campaignRoutes);
+app.use("/api/campaigns", campaignRoutes);
+
+const profileRoutes = require("./routes/profile.routes");
+app.use("/api/profile", profileRoutes );
 
 
 

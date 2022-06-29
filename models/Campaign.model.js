@@ -15,7 +15,7 @@ const campaignSchema = new Schema(
       type: String,
     }],
     totalAmount: Number,
-    creator: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    creator: {type: Schema.Types.ObjectId, ref: 'User'},
     
     donations: [{type: Schema.Types.ObjectId, ref: 'User'}], 
 },

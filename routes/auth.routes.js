@@ -33,15 +33,16 @@ router.post('/signup', async (req, res, next) => {
     const { username, password } = req.body
     console.log("Post logs");
     const user = await User.findOne({ username })
+    console.log(user);
 
    
   
     if (user === null) {
       res.status(404).json({ message: 'Username not found', status: 'KO' })
     } else {
-      const { passwordHash, createdAt, updatedAt } = user
+      const { passwordHash, createdAt, updatedAt, _id } = user
       if (bcryptjs.compareSync(password, passwordHash)) {
-        const tempUser = { username, createdAt, updatedAt }
+        const tempUser = { username, createdAt, updatedAt,id:_id }
         delete tempUser.passwordHash
         const token = jwt.sign(tempUser, process.env.TOKEN_SECRET, {
           algorithm: 'HS256',
