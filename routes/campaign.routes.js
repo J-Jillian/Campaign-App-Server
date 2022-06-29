@@ -17,16 +17,15 @@ router.get('/:campaignId', async(req, res, next)=>{
 
 //Create a campaign
 
-router.post ('/', async (req, res, next)=> {
-const {CampaignName, place, image, description, foundsFor, creator } = req.body
+router.post ('/create', async (req, res, next)=> {
+const {CampaignName, place, description, foundsFor} = req.body
   try {
     const campaign = await Campaign.create({
         CampaignName : CampaignName.trim(),
         place : place.trim(),
         description: description,
-        image: image,
+        // image: image,
         foundsFor : foundsFor,
-        creator: creator
  })
     
   } catch (error) {
