@@ -8,17 +8,17 @@ router.get('/', async (req, res, next) => {
   })
 
 // Get Campaigns details 
-router.get('/:campaignId', async(req, res, next)=>{
+router.get('/:campaignId',isAuthenticated, async(req, res, next)=>{
  const { campaignId } = req.params 
 
- const campaign = await Campaign.findbyId(campaignId)
+ const campaign = await Campaign.findById(campaignId)
  res.json(campaign)
 })
 
 //Create a campaign
 
 router.post ('/create', isAuthenticated, async (req, res, next)=> {
-const {CampaignName, place, description, foundsFor} = req.body
+const {CampaignName, place, description, foundsFor, totalAmount} = req.body
 const creator = req.payload.id
   try {
     const campaign = await Campaign.create({
@@ -27,6 +27,7 @@ const creator = req.payload.id
         description,
         // image: image,
         foundsFor,
+        totalAmount,
         creator
  })
  res.json(campaign);
@@ -52,9 +53,9 @@ const creator = req.payload.id
         newData.place = place.trim()
     }
 
-    if(image !==''){
-        newData.image = image
-    }
+    // if(image !==''){
+    //     newData.image = image
+    // }
 
     if(description !==''){
         newData.description = description.trim()

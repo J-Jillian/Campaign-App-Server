@@ -11,9 +11,9 @@ const campaignSchema = new Schema(
     image: String,
     place: String,
 
-    fundsFor: [{
+    fundsFor: {
       type: String,
-    }],
+    },
     totalAmount: Number,
     creator: {type: Schema.Types.ObjectId, ref: 'User'},
     
