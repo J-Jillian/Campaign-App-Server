@@ -12,13 +12,14 @@ router.get('/:campaignId',isAuthenticated, async(req, res, next)=>{
  const { campaignId } = req.params 
 
  const campaign = await Campaign.findById(campaignId)
+ console.log(campaignId, "Detalles de campaña")
  res.json(campaign)
 })
 
 //Create a campaign
 
 router.post ('/create', isAuthenticated, async (req, res, next)=> {
-const {CampaignName, place, description, foundsFor, totalAmount} = req.body
+const {CampaignName, place, description, fundsFor, totalAmount} = req.body
 const creator = req.payload.id
   try {
     const campaign = await Campaign.create({
@@ -26,7 +27,7 @@ const creator = req.payload.id
         place, 
         description,
         // image: image,
-        foundsFor,
+        fundsFor,
         totalAmount,
         creator
  })
@@ -41,16 +42,16 @@ const creator = req.payload.id
 
  router.put ('/:campaignId', async (req, res, next) => {
     const { campaignId } = req.params
-    const {CampaignName, place, image, description, foundsFor, creator, totalAmount } = req.body
+    const {CampaignName, place, description, fundsFor, creator, totalAmount } = req.body
     
     const newData = {}
 
     if(CampaignName !==''){
-        newData.CampaignName.trim()
+        newData.CampaignName = CampaignName
     }
 
     if(place !==''){
-        newData.place = place.trim()
+        newData.place = place
     }
 
     // if(image !==''){
@@ -58,15 +59,15 @@ const creator = req.payload.id
     // }
 
     if(description !==''){
-        newData.description = description.trim()
+        newData.description = description
     }
 
-    if(foundsFor !==''){
-        newData.foundsFor = foundsFor.trim()
+    if(fundsFor !==''){
+        newData.fundsFor = fundsFor
     }
 
     if(creator !==''){
-        newData.creator = creator.trim()
+        newData.creator = creator
     }
 
     if(totalAmount !=='0'){
